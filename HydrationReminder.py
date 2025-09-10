@@ -51,7 +51,7 @@ class HydrationReminder:
         self.tray_icon = None
         self.reminder_timer = None
         self.is_running = False
-        self.reminder_interval = 30
+        self.reminder_interval = 20
         self.log_dir = "HydrationReminderLog"
 
         self.setup_logging()
