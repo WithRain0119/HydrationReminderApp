@@ -1,0 +1,1 @@
+pyinstaller --onefile --noconsole --icon=0.ico --icon=1.ico --icon=2.ico --icon=3.ico --icon=4.ico --icon=5.ico HydrationReminder.py
