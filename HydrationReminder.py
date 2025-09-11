@@ -166,47 +166,47 @@ class HydrationReminder:
         main_frame = tk.Frame(self.root, bg='white', padx=40, pady=40)
         main_frame.pack(fill='both', expand=True)
 
-        tk.Label(main_frame, text="💧 喝水提醒助手", font=("Arial", 24, "bold"),
+        tk.Label(main_frame, text="💧 喝水提醒助手", font=("微软雅黑", 24, "bold"),
                  fg='#1d1d1f', bg='white').pack(pady=(0, 8))
-        tk.Label(main_frame, text="保持健康的饮水习惯", font=("Arial", 13),
+        tk.Label(main_frame, text="保持健康的饮水习惯", font=("宋体", 13),
                  fg='#86868b', bg='white').pack(pady=(0, 20))
 
         self.status_label = tk.Label(main_frame, text="● 提醒服务已停止",
-                                     font=("Arial", 16), fg='#ff3b30', bg='#f5f5f7',
+                                     font=("宋体", 16), fg='#ff3b30', bg='#f5f5f7',
                                      relief='solid', bd=1, padx=10, pady=10)
         self.status_label.pack(fill='x', pady=(0, 30))
 
-        tk.Label(main_frame, text="提醒间隔设置", font=("Arial", 18, "bold"),
+        tk.Label(main_frame, text="提醒间隔设置", font=("微软雅黑", 18, "bold"),
                  fg='#1d1d1f', bg='white').pack(pady=(0, 4))
-        tk.Label(main_frame, text="设置多长时间提醒您喝水一次", font=("Arial", 13),
+        tk.Label(main_frame, text="设置多长时间提醒您喝水一次", font=("宋体", 13),
                  fg='#86868b', bg='white').pack(pady=(0, 16))
 
         input_frame = tk.Frame(main_frame, bg='white')
         input_frame.pack(pady=(0, 8))
         self.time_var = tk.StringVar(value=str(self.reminder_interval))
         self.time_entry = tk.Entry(input_frame, textvariable=self.time_var,
-                                   font=("Arial", 14), width=6, justify='center',
+                                   font=("微软雅黑", 14), width=6, justify='center',
                                    relief='solid', bd=2)
         self.time_entry.configure(insertbackground='#007aff')
-        label_minute = tk.Label(input_frame, text="分钟", font=("Arial", 14),
+        label_minute = tk.Label(input_frame, text="分钟", font=("微软雅黑", 14),
                                 fg='#1d1d1f', bg='white')
         self.time_entry.pack(side='left')
         label_minute.pack(side='left', padx=(12, 0))
 
         self.countdown_var = tk.StringVar(value="")
-        tk.Label(main_frame, textvariable=self.countdown_var, font=("Arial", 14),
+        tk.Label(main_frame, textvariable=self.countdown_var, font=("微软雅黑", 14),
                  fg='#1d1d1f', bg='white').pack(pady=(0, 20))
 
         self.start_btn = tk.Button(main_frame, text="开始提醒",
-                                   font=("Arial", 14, "bold"), fg='white',
+                                   font=("微软雅黑", 14, "bold"), fg='white',
                                    bg='#007aff', activebackground='#0056cc',
                                    activeforeground='white', relief='flat', bd=0,
-                                   padx=20, pady=6, cursor='hand2',
+                                   padx=20, pady=1, cursor='hand2',
                                    command=self.toggle_reminder)
         self.start_btn.pack(fill='x', pady=(0, 12))
 
         close_btn = tk.Button(main_frame, text="关闭程序",
-                              font=("Arial", 12), fg='#1d1d1f',
+                              font=("微软雅黑", 12), fg='#1d1d1f',
                               bg='#e6e6e6', activebackground='#d9d9d9',
                               activeforeground='#1d1d1f', relief='flat', bd=0,
                               padx=20, pady=4, cursor='hand2',
@@ -235,12 +235,13 @@ class HydrationReminder:
         if self.root and self.root.winfo_exists():
             if self.is_running:
                 self.status_label.config(
-                    text=f"● 提醒服务运行中 (每{self.reminder_interval}分钟)", fg='#30d158')
-                self.start_btn.config(text="停止提醒", bg='#ff3b30', activebackground='#cc2e24')
+                    text=f"● 提醒服务运行中 (每{self.reminder_interval}分钟)", fg='#30d158',font = ("微软雅黑",13))
+                self.start_btn.config(text="停止提醒", bg='#ff3b30', activebackground='#cc2e24',font=("微软雅黑", 14, "bold")
+                                      ,padx=20, pady=1)
                 self.time_entry.config(state='disabled')
             else:
                 self.status_label.config(text="● 提醒服务已停止", fg='#ff3b30')
-                self.start_btn.config(text="开始提醒", bg='#007aff', activebackground='#0056cc')
+                self.start_btn.config(text="开始提醒", bg='#007aff', activebackground='#0056cc', font=("微软雅黑", 14, "bold"),padx=20, pady=1)
                 self.time_entry.config(state='normal')
 
     def toggle_reminder(self):
@@ -292,6 +293,7 @@ class HydrationReminder:
             remaining = int(self.reminder_timer.finished_at - time.time())
             if remaining < 0:
                 remaining = 0
+
             minutes, seconds = divmod(remaining, 60)
             self.countdown_var.set(f"距离下一次提醒: {minutes:02d}:{seconds:02d}")
             self.root.after(1000, self.update_countdown)
